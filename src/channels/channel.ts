@@ -30,9 +30,9 @@ export class Channel {
         this.private = new PrivateChannel(options);
         this.presence = new PresenceChannel(io, options);
 
-        if (this.options.devMode) {
+
             Log.success('Channels are ready.');
-        }
+
     }
 
     /**
@@ -75,9 +75,9 @@ export class Channel {
 
             socket.leave(channel);
 
-            if (this.options.devMode) {
+
                 Log.info(`[${new Date().toLocaleTimeString()}] - ${socket.id} left channel: ${channel} (${reason})`);
-            }
+
         }
     }
 
@@ -113,9 +113,9 @@ export class Channel {
 
             this.onJoin(socket, data.channel);
         }, error => {
-            if (this.options.devMode) {
+
                 Log.error(error.reason);
-            }
+
 
             this.io.sockets.to(socket.id)
                 .emit('subscription_error', data.channel, error.status);
@@ -133,9 +133,9 @@ export class Channel {
      * On join a channel log success.
      */
     onJoin(socket: any, channel: string): void {
-        if (this.options.devMode) {
+
             Log.info(`[${new Date().toLocaleTimeString()}] - ${socket.id} joined channel: ${channel}`);
-        }
+
     }
 
     /**

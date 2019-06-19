@@ -21,9 +21,7 @@ export class HttpSubscriber implements Subscriber {
             this.express.post('/apps/:appId/events', (req, res) => {
                 let body: any = [];
                 res.on('error', (error) => {
-                    if (this.options.devMode) {
                         Log.error(error);
-                    }
                 });
 
                 req.on('data', (chunk) => body.push(chunk))
