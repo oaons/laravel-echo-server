@@ -1,4 +1,12 @@
 "use strict";
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var request = require('request');
 var url = require('url');
@@ -12,7 +20,7 @@ var PrivateChannel = (function () {
         var options = {
             url: this.authHost(socket) + this.options.authEndpoint,
             form: { channel_name: data.channel },
-            headers: (data.auth && data.auth.headers) ? data.auth.headers : {},
+            headers: __assign({}, ((data.auth && data.auth.headers) ? data.auth.headers : {}), this.options.authHeaders),
             rejectUnauthorized: false
         };
         log_1.Log.info("[" + new Date().toLocaleTimeString() + "] - Sending auth request to: " + options.url + "\n");
